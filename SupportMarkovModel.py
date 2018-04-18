@@ -169,6 +169,18 @@ def report_CBA(simOutputs_none, simOutputs_anticoag):
     :param simOutputs_none: output of a cohort simulated under none treatment
     :param simOutputs_anticoag: output of a cohort simulated under anticoagulation treatment
     """
+    # increase in discounted total cost under anticoagulation treatment with respect to none treatment
+    increase_discounted_cost = Stat.DifferenceStatIndp(
+        name='Increase in discounted cost',
+        x=simOutputs_anticoag.get_costs(),
+        y_ref=simOutputs_none.get_costs())
+    # increase in discounted total utility under anticoagulation treatment with respect to none treatment
+    increase_discounted_utility = Stat.DifferenceStatIndp(
+        name='Increase in discounted cost',
+        x=simOutputs_anticoag.get_utilities(),
+        y_ref=simOutputs_none.get_utilities())
+    print ("I recommend the folllwing willingness-to-pay level for adopting this anticoagulation drug: >",'${:,.2f}'.format(increase_discounted_cost.get_mean()/increase_discounted_utility.get_mean()))
+
 
     # define two strategies
     none_treatment_strategy = Econ.Strategy(
@@ -190,8 +202,8 @@ def report_CBA(simOutputs_none, simOutputs_anticoag):
 
     # show the net monetary benefit figure
     NBA.graph_deltaNMB_lines(
-        min_wtp=20000,
-        max_wtp=25000,
+        min_wtp=0,
+        max_wtp=50000,
         title='Cost-Benefit Analysis',
         x_label='Willingness-to-pay for one additional QALY ($)',
         y_label='Incremental Net Monetary Benefit ($)',
@@ -199,3 +211,4 @@ def report_CBA(simOutputs_none, simOutputs_anticoag):
         show_legend=True,
         figure_size=6
     )
+

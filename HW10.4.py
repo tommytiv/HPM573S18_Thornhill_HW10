@@ -19,16 +19,5 @@ cohort_anticoag = MarkovCls.Cohort(
 # simulate the cohort
 simOutputs_anticoag = cohort_anticoag.simulate()
 
-# draw survival curves and histograms
-#SupportMarkov.draw_survival_curves_and_histograms(simOutputs_none, simOutputs_anticoag)
-
-# print the estimates for the mean survival time and number of strokes
-SupportMarkov.print_outcomes(simOutputs_none, "No Treatment:")
-SupportMarkov.print_outcomes(simOutputs_anticoag, "Anticoagulation Treatment:")
-
-# print comparative outcomes
-SupportMarkov.print_comparative_outcomes(simOutputs_none, simOutputs_anticoag)
-
 # report the CBA results
 SupportMarkov.report_CBA(simOutputs_none, simOutputs_anticoag)
-
