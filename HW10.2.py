@@ -2,7 +2,6 @@ import ParameterClasses as P
 import MarkovModel as MarkovCls
 import SupportMarkovModel as SupportMarkov
 
-
 # simulating none therapy
 # create a cohort
 cohort_none = MarkovCls.Cohort(
